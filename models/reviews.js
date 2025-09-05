@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const { Schema, connect } = mongoose;
-
+// esquema de las reseñas
 const reviewSchema = new Schema({
   comment: String,
   rating: {

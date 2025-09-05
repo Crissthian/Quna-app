@@ -11,7 +11,6 @@ const signup = async (req, res, next) => {
     const user = new User({ username, email });
 
     const decision = await aj.protect(req, { userId: username, email });
-    console.log("Arcjet decision:", decision);
 
     if (decision.isDenied()) {
       if (decision.reason.isEmail()) {

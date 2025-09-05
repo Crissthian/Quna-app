@@ -1,6 +1,6 @@
-# Stayzio
+# Quna
 
-Stayzio es una aplicación web para la gestión y visualización de listados de propiedades, con funcionalidades de reseñas, autenticación de usuarios y mapas interactivos.
+Quna es una aplicación web para la gestión y visualización de listados de propiedades, con funcionalidades de reseñas, autenticación de usuarios y mapas interactivos.
 
 ## Tecnologías utilizadas
 

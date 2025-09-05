@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import Review from "./reviews.js";
 
-const { Schema, connect } = mongoose;
-
+const { Schema } = mongoose;
+// esquema de la coleccion
 const listingSchema = new Schema({
   title: String,
   description: String,

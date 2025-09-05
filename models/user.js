@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import passportLocalMongoose from "passport-local-mongoose";
 const { Schema } = mongoose;
-
+// esquema del usuario
 const userSchema = new Schema({
   email: {
     type: String,
