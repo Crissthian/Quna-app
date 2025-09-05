@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quna - Your Perfect Stay Awaits</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #4ade80, #166534);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover {
+      color: #166534;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #166534;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, #4ade80, #166534);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px #008f6c4d;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      background: radial-gradient(circle at 20% 50%,
+          rgba(44, 230, 143, 0.1) 0%,
+          transparent 50%),
+        radial-gradient(circle at 80% 20%,
+          rgba(18, 150, 73, 0.15) 0%,
+          transparent 50%);
+    }
+
+    .hero-content {
+      max-width: 900px;
+      z-index: 2;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #4ade80, #166534);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 40px;
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+      background: linear-gradient(135deg, #4ade80, #166534);
+      color: white;
+      padding: 18px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(66, 254, 97, 0.4);
+    }
+
+    .secondary-btn {
+      background: transparent;
+      color: white;
+      padding: 18px 40px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+    }
+
+    .secondary-btn:hover {
+      border-color: #166534;
+      background: #1ca3337a;
+      transform: translateY(-3px);
+    }
+
+    /* Floating Elements */
+    .floating-card {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 20px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-card-1 {
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-card-2 {
+      top: 30%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    .floating-card-3 {
+      bottom: 20%;
+      left: 5%;
+      animation-delay: 4s;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 50px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 60px;
+      background: linear-gradient(135deg, white, #166534);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+    }
+
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 40px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #166534, #166534);
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover::before {
+      transform: translateX(0);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(66, 254, 129, 0.3);
+      box-shadow: #166534cc;
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #4ade80, #166534);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon svg {
+      width: 28px;
+      height: 28px;
+      fill: white;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .feature-card p {
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 80px 50px;
+      background: linear-gradient(135deg,
+          rgba(63, 216, 25, 0.1),
+          rgba(12, 146, 8, 0.05));
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #166534;
+      margin-bottom: 10px;
+    }
+
+    .stat-item p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    /* CTA Section */
+    .final-cta {
+      padding: 100px 50px;
+      text-align: center;
+      background: linear-gradient(135deg, #202923, #141615);
+    }
+
+    .final-cta h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .final-cta p {
+      font-size: 1.3rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .final-cta-btn {
+      background: white;
+      color: #166534;
+      padding: 20px 50px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .final-cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    /* Footer */
+    footer {
+      background: #0a0a0a;
+      padding: 80px 50px 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-content {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .footer-brand .logo {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand p {
+      opacity: 0.7;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      background: #166534;
+      transform: translateY(-2px);
+    }
+
+    .footer-column h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: #166534;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column li {
+      margin-bottom: 12px;
+    }
+
+    .footer-column a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: #166534;
+    }
+
+    .footer-bottom {
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-bottom p {
+      opacity: 0.6;
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 30px;
+    }
+
+    .footer-legal a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-legal a:hover {
+      color: #166534;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      transition: left 0.3s ease;
+      z-index: 999;
+    }
+
+    .mobile-menu.active {
+      left: 0;
+    }
+
+    .mobile-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .mobile-close {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+
+      .floating-card-1,
+      .floating-card-2,
+      .floating-card-3 {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 15px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero {
+        padding: 0 20px;
+        height: 100vh;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 10vw, 4rem);
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        width: 280px;
+        text-align: center;
+      }
+
+      .features {
+        padding: 60px 20px;
+      }
+
+      .features h2 {
+        font-size: 2.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .feature-card {
+        padding: 30px 25px;
+      }
+
+      .floating-card {
+        display: none !important;
+      }
+
+      .stats {
+        padding: 60px 20px;
+      }
+
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+
+      .stat-item h3 {
+        font-size: 2.5rem;
+      }
+
+      .final-cta {
+        padding: 60px 20px;
+      }
+
+      .final-cta h2 {
+        font-size: 2.5rem;
+      }
+
+      .final-cta p {
+        font-size: 1.1rem;
+      }
+
+      footer {
+        padding: 60px 20px 30px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+      }
+
+      .footer-brand {
+        text-align: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+      }
+
+      .footer-legal {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .features h2,
+      .final-cta h2 {
+        font-size: 2rem;
+      }
+
+      .feature-card {
+        padding: 25px 20px;
+      }
+
+      .stats-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .footer-legal {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="logo"><i class="fa-solid fa-globe"></i> Quna</div>
+      <ul class="nav-links">
+        <li><a href="/home">Inicio</a></li>
+        <li><a href="#stays">Alojamientos</a></li>
+        <li><a href="#experiences">Experiencias</a></li>
+        <li><a href="#about">Acerca de</a></li>
+      </ul>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+      <a href="/listings" class="cta-button">Reservar ahora</a>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+    <a href="/home" onclick="toggleMobileMenu()">Inicio</a>
+    <a href="/listings" onclick="toggleMobileMenu()">Alojamientos</a>
+    <a href="#" onclick="toggleMobileMenu()">Experiencias</a>
+    <a href="#" onclick="toggleMobileMenu()">Acerca de</a>
+    <a href="/listings" class="cta-button">Reservar ahora</a>
+  </div>
+
+  <section class="hero">
+    <div class="floating-card floating-card-1">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div style="
+              width: 40px;
+              height: 40px;
+              background: #166534;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            ">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>
+        </div>
+        <div>
+          <div style="font-weight: 600">Luxury Villa</div>
+          <div style="opacity: 0.7; font-size: 0.9rem">5000/noche</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="floating-card floating-card-2">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div style="
+              width: 40px;
+              height: 40px;
+              background: #166534;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            ">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path
+                  d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+          </svg>
+        </div>
+        <div>
+          <div style="font-weight: 600">4.5/5 Puntuación</div>
+          <div style="opacity: 0.7; font-size: 0.9rem">2,847 opiniones</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="floating-card floating-card-3">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <div style="
+              width: 40px;
+              height: 40px;
+              background: #166534;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            ">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path
+                  d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M12,6A6,6 0 0,1 18,12A6,6 0 0,1 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6M12,8A4,4 0 0,0 8,12A4,4 0 0,0 12,16A4,4 0 0,0 16,12A4,4 0 0,0 12,8M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10Z" />
+          </svg>
+        </div>
+        <div>
+          <div style="font-weight: 600">Reserva Instantánea</div>
+          <div style="opacity: 0.7; font-size: 0.9rem">Disponible ahora</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-content">
+      <h1>Tu Estancia Perfecta Te Espera</h1>
+      <p>
+        Descubre alojamientos extraordinarios, desde acogedores apartamentos
+        hasta lujosas villas. Reserva estancias únicas que se adapten a tu
+        estilo y crea recuerdos inolvidables.
+      </p>
+      <div class="hero-buttons">
+        <a href="/listings" class="primary-btn">Comenzar a Explorar</a>
+        <a href="#" class="secondary-btn">Ver Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>¿Por qué elegir Quna?</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>
+        </div>
+        <h3>Propiedades Curadas</h3>
+        <p>
+          Cada propiedad es seleccionada a mano y verificada para garantizar
+          una calidad excepcional, comodidad y experiencias memorables para
+          todos los huéspedes.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7,2V13H10V22L17,10H13L17,2H7Z" />
+          </svg>
+        </div>
+        <h3>Reserva Instantánea</h3>
+        <p>
+          Evita la espera. Reserva al instante con nuestro proceso simplificado y
+          obtén confirmación inmediata para tu escapada perfecta.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+                  d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.9 16,12.4 16,13V16C16,17 15,18 14,18H10C9,18 8,17 8,16V13C8,12.4 8.4,11.9 9,11.5V10C9,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.2,9.2 10.2,10V11.5H13.8V10C13.8,9.2 12.8,8.2 12,8.2Z" />
+          </svg>
+        </div>
+        <h3>Seguro y Seguro</h3>
+        <p>
+          Tu seguridad es nuestra prioridad. Todos los pagos están asegurados y
+          las propiedades son minuciosamente verificadas para tu tranquilidad.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+                  d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z" />
+          </svg>
+        </div>
+        <h3>Soporte 24/7</h3>
+        <p>
+          Nuestro equipo dedicado siempre está aquí para ayudar, asegurando que tu estancia sea
+          fluida desde la reserva hasta el check-out.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+                  d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M17,12C17,14.76 14.76,17 12,17C9.24,17 7,14.76 7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" />
+          </svg>
+        </div>
+        <h3>Red Global</h3>
+        <p>
+          Accede a miles de propiedades únicas en todo el mundo, desde
+          apartamentos urbanos hasta retiros remotos y todo lo que hay en
+          medio.
+        </p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+                  d="M16,9H19L14,16M10,9H13L8,16M12,2C13.11,2 14,2.9 14,4C14,5.11 13.11,6 12,6C10.89,6 10,5.11 10,4C10,2.9 10.89,2 12,2M21,9V7L19,5.5V4A2,2 0 0,0 17,2H16.5L15,0.5L13.5,2H10.5L9,0.5L7.5,2H7A2,2 0 0,0 5,4V5.5L3,7V9H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V9H21M7,9H17V19H7V9Z" />
+          </svg>
+        </div>
+        <h3>Mejor Garantía de Precio</h3>
+        <p>
+          ¿Encuentras la misma propiedad más barata en otro lugar? Igualaremos
+          el precio y te daremos un 5% adicional de descuento en tu reserva.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="stats">
+    <div class="stats-container">
+      <div class="stat-item">
+        <h3>100+</h3>
+        <p>Clientes Felices</p>
+      </div>
+      <div class="stat-item">
+        <h3>100+</h3>
+        <p>Propiedades</p>
+      </div>
+      <div class="stat-item">
+        <h3>15+</h3>
+        <p>Países</p>
+      </div>
+      <div class="stat-item">
+        <h3>4.5</h3>
+        <p>Calificación Promedio</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <h2>¿Listo para tu próxima aventura?</h2>
+    <p>Únete a miles de viajeros que confían en Quna para sus estancias perfectas</p>
+    <a href="#" class="final-cta-btn">Reserva tu estancia hoy</a>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo"><i class="fa-solid fa-globe"></i>Quna</div>
+          <p>
+            Descubre alojamientos extraordinarios en todo el mundo. Desde
+            apartamentos acogedores hasta villas de lujo, te ayudamos a encontrar
+            la estancia perfecta para cada viaje.
+          </p>
+          <div class="social-links">
+            <a href="#" title="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                      d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+            <a href="#" title="Twitter">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                      d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+              </svg>
+            </a>
+            <a href="#" title="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                      d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+            </a>
+            <a href="#" title="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                      d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Descubrir</h4>
+          <ul>
+            <li><a href="/listings">Mejores Destinos</a></li>
+            <li><a href="/listings">Estancias de Lujo</a></li>
+            <li><a href="/listings">Opciones Económicas</a></li>
+            <li><a href="/listings">Propiedades Únicas</a></li>
+            <li><a href="/listings">Ofertas de Último Minuto</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Compañía</h4>
+          <ul>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Asociaciones</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Soporte</h4>
+          <ul>
+            <li><a href="/contact">Centro de Ayuda</a></li>
+            <li><a href="/contact">Contáctanos</a></li>
+            <li><a href="#">Consejos de Seguridad</a></li>
+            <li><a href="#">Cancelación</a></li>
+            <li><a href="#">Seguro</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Host</h4>
+          <ul>
+            <li><a href="/listings/new">Conviértete en Anfitrión</a></li>
+            <li><a href="#">Recursos para Anfitriones</a></li>
+            <li><a href="#">Guías para Anfitriones</a></li>
+            <li><a href="#">Comunidad de Anfitriones</a></li>
+            <li><a href="#">Seguro para Anfitriones</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2024 Quna. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="/privacy">Política de Privacidad</a>
+          <a href="/terms">Términos de Servicio</a>
+          <a href="/cookie">Política de Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById("mobileMenu");
+      mobileMenu.classList.toggle("active");
+      document.body.style.overflow = mobileMenu.classList.contains("active")
+        ? "hidden"
+        : "auto";
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
+    });
+
+    window.addEventListener("scroll", () => {
+      const nav = document.querySelector("nav");
+      if (window.scrollY > 100) {
+        nav.style.background = "rgba(0, 0, 0, 0.95)";
+      } else {
+        nav.style.background = "rgba(0, 0, 0, 0.8)";
+      }
+    });
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll(".feature-card, .stat-item").forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(30px)";
+      el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+      observer.observe(el);
+    });
+  </script>
+</body>
+
+</html>

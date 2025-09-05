@@ -1,0 +1,262 @@
+<% layout("/layouts/boilerplate") %>
+
+  <body>
+    <div class="listings-container">
+
+      <div class="container mt-4">
+        <div class="listings-header">
+          <h1 class="listings-title">
+            <i class="fas fa-home me-3" style="color: var(--primary-color);"></i>
+            Descubre Alojamientos Increíbles
+          </h1>
+          <p class="listings-subtitle">Encuentra tu escapada perfecta en nuestra colección curada</p>
+        </div>
+
+        <div class="category-section">
+          <div class="category-scroll-container">
+            <div class="scroll-button scroll-button-left" onclick="scrollCategories('left')">
+              <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="scroll-button scroll-button-right" onclick="scrollCategories('right')">
+              <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="category-container" id="categoryContainer">
+              <a href="#" class="category-item active" data-category="all">
+                <div class="category-icon">
+                  <i class="fas fa-fire"></i>
+                </div>
+                <div class="category-label">Tendencias</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="rooms">
+                <div class="category-icon">
+                  <i class="fas fa-bed"></i>
+                </div>
+                <div class="category-label">Habitaciones</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="cities">
+                <div class="category-icon">
+                  <i class="fas fa-city"></i>
+                </div>
+                <div class="category-label">Ciudades Icónicas</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="mountains">
+                <div class="category-icon">
+                  <i class="fas fa-mountain"></i>
+                </div>
+                <div class="category-label">Montañas</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="castles">
+                <div class="category-icon">
+                  <i class="fas fa-chess-rook"></i>
+                </div>
+                <div class="category-label">Castillos</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="pools">
+                <div class="category-icon">
+                  <i class="fas fa-swimmer"></i>
+                </div>
+                <div class="category-label">Asombrosas Piscinas</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="camping">
+                <div class="category-icon">
+                  <i class="fas fa-campground"></i>
+                </div>
+                <div class="category-label">Campamentos</div>
+              </a>
+              <a href="#" class="category-item" data-category="farms">
+                <div class="category-icon">
+                  <i class="fas fa-tractor"></i>
+                </div>
+                <div class="category-label">Granjas</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="beach">
+                <div class="category-icon">
+                  <i class="fas fa-umbrella-beach"></i>
+                </div>
+                <div class="category-label">Frente de Playa</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="luxury">
+                <div class="category-icon">
+                  <i class="fas fa-gem"></i>
+                </div>
+                <div class="category-label">Lujo</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="cabins">
+                <div class="category-icon">
+                  <i class="fas fa-home"></i>
+                </div>
+                <div class="category-label">Cabañas</div>
+              </a>
+
+              <a href="#" class="category-item" data-category="boats">
+                <div class="category-icon">
+                  <i class="fas fa-ship"></i>
+                </div>
+                <div class="category-label">Botes</div>
+              </a>
+            </div>
+          </div>
+
+          <div class="tax-toggle">
+            <div class="form-check-reverse form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+              <label class="form-check-label" for="flexSwitchCheckDefault">Mostrando precios sin IGV</label>
+            </div>
+          </div>
+        </div>
+
+        <% if (listings && listings.length> 0) { %>
+          <div class="listings-grid row row-cols-1 row-cols-lg-4 row-cols-md-3 g-4" id="listingsGrid">
+            <% for (const listing of listings) { %>
+              <div class="col listing-card-wrapper" data-category="<%= listing.category || 'all' %>">
+                <a href="/listings/<%= listing._id %>" class="listing-link">
+                  <div class="card listing-card h-100 position-relative">
+                    <img src="<%= listing.image.url%>" class="card-img-top listing-image" loading="lazy"
+                         alt="<%= listing.title %> Image">
+                    <div class="card-img-overlay image-overlay d-flex align-items-end p-2">
+                      <h5 class="text-white listing-title-overlay mb-1">
+                        <i class="fas fa-map-marker-alt me-2" style="font-size: 0.9rem; opacity: 0.8;"></i>
+                        <%= listing.title %>
+                      </h5>
+                    </div>
+                    <div class="card-body card-body-enhanced">
+                      <div class="location-text">
+                        <i class="fas fa-location-dot location-icon"></i>
+                        <%= listing.location %>, <%= listing.country %>
+                      </div>
+                      <p class="card-text description-text">
+                        <i class="fas fa-quote-left me-2"
+                           style="color: var(--primary-color); font-size: 0.8rem; opacity: 0.6;"></i>
+                        <%= listing.description %>
+                      </p>
+                      <div class="price-tag" data-price="<%= listing.price %>"><i
+                           class="fa-solid fa-tag price-icon"></i><span class="price-value">
+                          <%= listing.price.toLocaleString("es-PE", { style: "currency" , currency: "PEN" }) %>
+                        </span>/noche <i class="tax-info">+18% IGV</i>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <% } %>
+          </div>
+          <% } else { %>
+            <div class="row">
+              <div class="col-12 text-center mt-5">
+                <div class="alert alert-warning" role="alert">
+                  <h4 class="alert-heading">No Listings Found!</h4>
+                  <% if (searchQuery && searchQuery.trim() !=="" ) { %>
+                    <p>We couldn't find any listings matching your search for "<strong>
+                        <%= searchQuery %>
+                      </strong>".</p>
+                    <% } else { %>
+                      <p>It looks like there are no listings available at the moment. Why not be the first to add one?
+                      </p>
+                      <% } %>
+                        <hr>
+                        <p class="mb-0">Try searching for something else or <a href="/listings" class="alert-link">view
+                            all listings</a>.</p>
+                </div>
+              </div>
+            </div>
+            <% } %>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const categoryItems = document.querySelectorAll('.category-item');
+        const listingCards = document.querySelectorAll('.listing-card-wrapper');
+
+        categoryItems.forEach(item => {
+          item.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            categoryItems.forEach(cat => cat.classList.remove('active'));
+
+            this.classList.add('active');
+
+            const selectedCategory = this.getAttribute('data-category');
+
+            listingCards.forEach(card => {
+              const cardCategory = card.getAttribute('data-category');
+
+              if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+                card.style.display = 'block';
+                card.style.animation = 'fadeIn 0.5s ease-in-out';
+              } else {
+                card.style.display = 'none';
+              }
+            });
+          });
+        });
+      });
+
+
+
+      function scrollCategories(direction) {
+        const container = document.getElementById('categoryContainer');
+        const scrollAmount = 200;
+
+        if (direction === 'left') {
+          container.scrollLeft -= scrollAmount;
+        } else {
+          container.scrollLeft += scrollAmount;
+        }
+      }
+
+      let taxSwitch = document.getElementById('flexSwitchCheckDefault');
+      taxSwitch.addEventListener('change', () => {
+        const priceTags = document.querySelectorAll(".price-tag");
+
+        priceTags.forEach(tag => {
+          let basePrice = parseFloat(tag.getAttribute("data-price"));
+          let priceValue = tag.querySelector(".price-value");
+          let taxInfo = tag.querySelector(".tax-info");
+
+          if (taxSwitch.checked) {
+            let totalPrice = Math.round(basePrice * 1.18);
+            priceValue.textContent = totalPrice.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD"
+            });
+            taxInfo.style.display = "none"; // ocultar "+18% GST"
+          } else {
+            priceValue.textContent = basePrice.toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD"
+            });
+            taxInfo.style.display = "inline"; // mostrar "+18% GST"
+          }
+        });
+      });
+
+
+
+      const style = document.createElement('style');
+      style.textContent = `
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    `;
+      document.head.appendChild(style);
+    </script>
+    <script>
+      if (window.location.search.includes("q=")) {
+        window.history.replaceState({}, document.title, "/listings");
+      }
+    </script>
+
+  </body>
+
+  </html>

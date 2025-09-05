@@ -1,0 +1,61 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="error-screen d-flex justify-content-center align-items-center">
+  <div class="error-card text-center rounded shadow-lg">
+    <i class="fa-solid fa-earth-asia me-2" style="color: #166534"></i>Quna
+    <h3 class="fw-bold mb-2 text-danger">Sorry! Something broke.</h3>
+    <p class="text-muted">
+      <%= err.message || "We ran into an unexpected error. Try again later." %>
+    </p>
+    <a href="/listings" class="btn btn-danger error-btn">Go Back </a>
+  </div>
+</div>
+
+<style>
+  .error-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0.07);
+    backdrop-filter: blur(2px);
+    z-index: 9999;
+  }
+
+  .error-card {
+    background-color: #fff;
+    padding: 2rem 2.5rem;
+    max-width: 420px;
+    width: 100%;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .error-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .error-icon {
+    width: 70px;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+    transition: transform 0.2s ease;
+  }
+
+  .error-icon:hover {
+    transform: scale(1.1);
+  }
+
+  .error-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .error-btn:hover {
+    background-color: white;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+  }
+</style>

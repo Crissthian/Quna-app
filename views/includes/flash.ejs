@@ -1,0 +1,15 @@
+<!-- para mensajes de éxito -->
+
+<% if (success && success.length> 0) { %>
+  <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+    <%= success.join("<br>") %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <% } %>
+    <!-- para mensajes de error -->
+    <% if (error && error.length> 0) { %>
+      <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+        <%= error.join("<br>") %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% } %>

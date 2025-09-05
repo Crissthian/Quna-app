@@ -1,0 +1,340 @@
+:root {
+  --primary-color: #166534;
+  --secondary-color: #f8f9fa;
+  --text-dark: #2c3e50;
+  --text-muted: #6c757d;
+  --border-light: rgba(0, 0, 0, 0.1);
+  --shadow-light: 0 2px 15px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 4px 25px rgba(0, 0, 0, 0.12);
+  --gradient-primary: linear-gradient(135deg, #006414 0%, #009929 100%);
+}
+
+.listing-header {
+  background: linear-gradient(
+    135deg,
+    rgba(66, 254, 82, 0.05) 0%,
+    rgba(107, 255, 169, 0.05) 100%
+  );
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(66, 254, 122, 0.1);
+}
+
+.listing-title {
+  color: var(--text-dark);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.listing-title::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+.action-buttons .btn {
+  border-radius: 25px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-light);
+}
+
+.action-buttons .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.listing-image-container {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+  margin-bottom: 2rem;
+}
+
+.listing-image {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.listing-image:hover {
+  transform: scale(1.02);
+}
+
+.details-card {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-light);
+  border: none;
+  margin-bottom: 2rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.detail-icon {
+  width: 20px;
+  color: var(--primary-color);
+  margin-right: 1rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-right: 0.5rem;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  color: var(--text-muted);
+  flex-grow: 1;
+}
+
+.price-highlight {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.owner-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-style: italic;
+  transition: all 0.3s ease;
+}
+
+.owner-link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.review-section {
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--shadow-light);
+  border: none;
+  overflow: hidden;
+}
+
+.review-header {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 1.5rem 2rem;
+  margin: -1.5rem -2rem 2rem -2rem;
+}
+
+.star-rating {
+  font-size: 1.8rem;
+  margin: 1rem 0;
+}
+
+.star-rating i {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 0.3rem;
+}
+
+.star-rating i:hover {
+  transform: scale(1.2);
+}
+
+.review-form textarea {
+  border-radius: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.review-form textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(28, 139, 6, 0.25);
+}
+
+.submit-btn {
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-light);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.review-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-light);
+  border: none;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.review-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+}
+
+.reviewer-name {
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.reviewer-name a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.reviewer-name a:hover {
+  text-decoration: underline;
+}
+
+.review-rating {
+  margin: 0.5rem 0;
+}
+
+.review-comment {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+
+.delete-review-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(220, 53, 69, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  color: #dc3545;
+  transition: all 0.3s ease;
+}
+
+.delete-review-btn:hover {
+  background: #dc3545;
+  color: white;
+  transform: scale(1.1);
+}
+
+.section-divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
+  margin: 3rem 0;
+}
+
+.all-reviews-header {
+  text-align: center;
+  color: var(--text-dark);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.all-reviews-header::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--gradient-primary);
+  border-radius: 2px;
+}
+
+.no-reviews {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .listing-header {
+    padding: 1.5rem;
+  }
+
+  .details-card {
+    padding: 1.5rem;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detail-label {
+    min-width: auto;
+    margin-bottom: 0.3rem;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.5rem !important;
+  }
+
+  .action-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+#map {
+  height: 400px;
+  width: 100%;
+}

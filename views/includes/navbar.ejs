@@ -1,0 +1,415 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+      <i class="fa-solid fa-earth-asia brand-icon"></i>
+      <span class="fw-bold brand-text">Quna</span>
+    </a>
+
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain"
+            aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMain">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/listings">
+            <i class="fa-solid fa-compass me-1"></i>
+            Explorar
+          </a>
+        </li>
+      </ul>
+
+      <div class="mx-auto d-none d-lg-flex">
+        <form class="d-flex search-form" action="/listings" method="GET">
+          <input class="form-control search-input" name="q" type="search" placeholder="Buscar destinos..." />
+          <button class="btn search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass me-1"></i> Buscar
+          </button>
+        </form>
+      </div>
+
+      <ul class="navbar-nav align-items-center mb-2 mb-lg-0 gap-2">
+        <li class="nav-item">
+          <a class="btn btn-add-listing d-flex align-items-center gap-2" href="/listings/new">
+            <i class="fa-solid fa-plus"></i>
+            <span class="add-listing-text">Conviértete en Anfitrión</span>
+          </a>
+        </li>
+
+        <% if (currentUser) { %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle user-profile-btn d-flex align-items-center gap-2 p-2" href="#"
+               id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="user-avatar">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div class="user-info d-none d-lg-block">
+                <div class="user-name">
+                  <%= currentUser.username %>
+                </div>
+              </div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg user-dropdown" aria-labelledby="userDropdown">
+              <li class="dropdown-header user-header">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="user-avatar-large">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                  <div>
+                    <strong>
+                      <%= currentUser.username %>
+                    </strong><br />
+                    <small class="text-muted">
+                      <%= currentUser.email %>
+                    </small>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center gap-2" href="/profile">
+                  <i class="fa-solid fa-user-edit"></i>
+                  Perfil
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item d-flex align-items-center gap-2 text-danger" href="/logout">
+                  <i class="fa-solid fa-sign-out-alt"></i>
+                  Cerrar session
+                </a>
+              </li>
+            </ul>
+          </li>
+          <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link auth-link" href="/signup">Registrarse</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-auth-primary" href="/login">Iniciar Sesión</a>
+            </li>
+            <% } %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<style>
+  :root {
+    --primary-gradient: linear-gradient(135deg, #4ade80, #166534);
+    --text-secondary: #718096;
+  }
+
+  /* Brand Styling */
+  .navbar-brand {
+    text-decoration: none !important;
+    transition: transform 0.2s ease;
+  }
+
+  .navbar-brand:hover {
+    transform: scale(1.05);
+  }
+
+  .brand-icon {
+    color: #166534;
+    font-size: 1.5rem;
+  }
+
+  .brand-text {
+    color: #166534;
+    font-size: 1.4rem;
+  }
+
+  /* Search Form */
+  .search-form {
+    position: relative;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 6px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 400px;
+    margin-bottom: 2px;
+  }
+
+  .search-input {
+    border: none !important;
+    background: transparent !important;
+    padding: 10px 18px !important;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    border-radius: 16px !important;
+    box-shadow: none !important;
+  }
+
+  .search-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(22, 206, 62, 0.2) !important;
+  }
+
+  .search-input::placeholder {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .search-btn {
+    /* Add this line to make the button narrower */
+    padding: 0.5rem 0.9rem 0.5rem 0.5rem !important;
+    /* Adjust the second value (1.2rem) to change the width */
+    background: var(--primary-gradient) !important;
+    border: none !important;
+    color: white !important;
+    margin-bottom: 2px;
+    border-radius: 16px !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    box-shadow: 0 4px 15px rgba(4, 94, 8, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .search-btn::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+
+  .search-btn:hover::before {
+    width: 100%;
+    height: 100%;
+  }
+
+  .search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(18, 179, 26, 0.4);
+  }
+
+  /* Navbar Toggle */
+  .navbar-toggler {
+    padding: 0.5rem;
+    border-radius: 8px;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(11, 141, 28, 0.25);
+  }
+
+  /* Navigation Links */
+  .navbar .nav-link {
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+    padding: 0.75rem 1rem !important;
+    border-radius: 8px;
+    margin: 0 0.25rem;
+  }
+
+  .navbar .nav-link:hover {
+    color: #166534 !important;
+    background-color: rgba(66, 254, 129, 0.1);
+  }
+
+  /* Add Listing Button */
+  .btn-add-listing {
+    background: linear-gradient(135deg, #4ade80, #166534);
+    color: white !important;
+    border: none;
+    border-radius: 25px;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px #18922d75;
+  }
+
+  .btn-add-listing:hover {
+    background: linear-gradient(135deg, #4ade80, #166534);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px #1ca33370;
+    color: white !important;
+  }
+
+  .btn-add-listing:active {
+    transform: translateY(0);
+  }
+
+  /* User Profile Button */
+  .user-profile-btn {
+    background-color: #dee2e657;
+    border: 1px solid #dee2e6;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+    min-width: 50px;
+  }
+
+  .user-profile-btn:hover {
+    background-color: #0034006b;
+    border-color: #166534;
+    color: #166534 !important;
+  }
+
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #4ade80, #166534);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+  }
+
+  .user-info .user-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.2;
+  }
+
+  /* Dropdown Styling */
+  .user-dropdown {
+    border: none;
+    border-radius: 12px;
+    padding: 0.5rem 0;
+    min-width: 280px;
+    margin-top: 0.5rem;
+  }
+
+  .user-header {
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa;
+    border-radius: 12px 12px 0 0;
+    margin: -0.5rem -0rem 0.5rem -0rem;
+  }
+
+  .user-avatar-large {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #4ade80, #166534);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .dropdown-item {
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .dropdown-item:hover {
+    background-color: #0034004f;
+    color: #166534;
+  }
+
+  .dropdown-item.text-danger:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #006414;
+  }
+
+  /* Auth Links */
+  .auth-link {
+    color: #6c757d !important;
+    font-weight: 600;
+  }
+
+  .auth-link:hover {
+    color: #166534 !important;
+  }
+
+  .btn-auth-primary {
+    background-color: transparent;
+    color: #166534 !important;
+    border: 2px solid #166534;
+    border-radius: 25px;
+    padding: 0.5rem 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-auth-primary:hover {
+    background-color: #166534;
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(66, 254, 97, 0.3);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 991.98px) {
+    .add-listing-text {
+      display: none;
+    }
+
+    .btn-add-listing {
+      padding: 0.6rem;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .navbar-nav {
+      gap: 0.5rem !important;
+    }
+
+    .user-profile-btn {
+      border-radius: 8px;
+      padding: 0.5rem !important;
+    }
+
+    .nav-item {
+      margin: 0.25rem 0;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .container {
+      padding: 0 1rem;
+    }
+
+    .brand-text {
+      font-size: 1.2rem;
+    }
+
+    .brand-icon {
+      font-size: 1.3rem;
+    }
+  }
+
+  /* Smooth animations */
+  .navbar-collapse {
+    transition: all 0.3s ease;
+  }
+
+  /* Focus states for accessibility */
+  .btn-add-listing:focus,
+  .btn-auth-primary:focus,
+  .user-profile-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(66, 254, 122, 0.25);
+  }
+
+  .nav-link:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(66, 254, 122, 0.15);
+    border-radius: 8px;
+  }
+</style>

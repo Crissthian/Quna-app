@@ -1,0 +1,91 @@
+<% layout("/layouts/boilerplate") %>
+
+  <body class="bg-light">
+    <div class="container py-5">
+      <div class="card mx-auto shadow-sm" style="max-width: 650px; border-radius: 12px;">
+        <div class="card-body">
+          <h2 id="h2" class="text-center mb-4">Crear Listado</h2>
+          <form method="post" action="/listings" class="needs-validation" novalidate enctype="multipart/form-data">
+            <div class="mb-3">
+              <input type="text" name="listing[title]" class="form-control" placeholder="Título" required>
+              <div class="valid-feedback">¡Se ve bien!</div>
+              <div class="invalid-feedback">Por favor ingresa un título.</div>
+            </div>
+            <div class="mb-3">
+              <textarea name="listing[description]" class="form-control" rows="3" placeholder="Descripción"
+                        required></textarea>
+              <div class="valid-feedback">¡Se ve bien!</div>
+              <div class="invalid-feedback">Por favor ingresa una descripción.</div>
+            </div>
+            <div class="mb-3">
+              <input type="file" name="listing[image]" class="form-control" accept="image/*" required>
+              <div class="invalid-feedback">Por favor sube una imagen.</div>
+            </div>
+            <div class="mb-3">
+              <input type="number" id="price" name="listing[price]" class="form-control" placeholder="Precio por noche"
+                     required min="0" step="0.01">
+              <div class="valid-feedback">¡Se ve bien!</div>
+              <div class="invalid-feedback">Por favor ingresa un precio válido.</div>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="listing[location]" class="form-control" placeholder="Ubicación" required>
+              <div class="valid-feedback">¡Se ve bien!</div>
+              <div class="invalid-feedback">Por favor ingresa una ubicación.</div>
+            </div>
+            <div class="mb-3">
+              <input type="text" name="listing[country]" class="form-control" placeholder="País" required>
+              <div class="valid-feedback">¡Se ve bien!</div>
+              <div class="invalid-feedback">Por favor ingresa un país.</div>
+            </div>
+            <div class="mb-4">
+              <label for="category" class="form-label fw-semibold">Categoría</label>
+              <select class="form-select" id="category" name="listing[category]" required>
+                <option selected disabled value="">Elige...</option>
+                <option value="rooms">Habitaciones</option>
+                <option value="cities">Ciudades Icónicas</option>
+                <option value="mountains">Montañas</option>
+                <option value="castles">Castillos</option>
+                <option value="pools">Piscinas Increíbles</option>
+                <option value="camping">Camping</option>
+                <option value="farms">Granjas</option>
+                <option value="beach">Frente a la Playa</option>
+                <option value="luxury">Lujo</option>
+                <option value="cabins">Cabañas</option>
+                <option value="boats">Barcos</option>
+              </select>
+              <div class="valid-feedback">¡Categoría seleccionada!</div>
+              <div class="invalid-feedback">Por favor selecciona una categoría.</div>
+            </div>
+            <button type="submit" id="btn" class="btn w-100 btn-primary">Crear Listado</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("price").addEventListener("input", function (e) {
+        this.value = this.value.replace(/[^0-9.]/g, "");
+      });
+
+      (() => {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+          form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+              console.log("❌ Form blocked by client-side validation");
+            } else {
+              console.log("✅ Form is valid, submitting");
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+
+  </html>
